@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login and Signup Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #6fa8dc; /* A soft blue background */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 320px;
+    }
+    .form-control {
+        margin-bottom: 10px;
+    }
+    .form-control label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-control input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .btn {
+        background-color: #4CAF50; /* A nice shade of green */
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #45a049;
+    }
+    .toggle-btn {
+        text-align: center;
+        margin-top: 10px;
+    }
+    .toggle-btn a {
+        text-decoration: none;
+        color: #5c67f2;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div id="loginForm">
+        <h2>Login</h2>
+        <form>
+            <div class="form-control">
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" required>
+            </div>
+            <div class="form-control">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="toggle-btn">
+            <a onClick="switchForm('signupForm')">Need an account? Sign up</a>
+        </div>
+    </div>
+    <div id="signupForm" style="display:none;">
+        <h2>Signup</h2>
+        <form>
+            <div class="form-control">
+                <label for="signupUsername">Username:</label>
+                <input type="text" id="signupUsername" required>
+            </div>
+            <div class="form-control">
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" required>
+            </div>
+            <div class="form-control">
+                <label for="signupEmail">Email:</label>
+                <input type="email" id="signupEmail" required>
+            </div>
+            <button type="submit" class="btn">Signup</button>
+        </form>
+        <div class="toggle-btn">
+            <a onClick="switchForm('loginForm')">Already have an account? Login</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function switchForm(formId) {
+    var forms = ['loginForm', 'signupForm'];
+    forms.forEach(form => {
+        if (form === formId) {
+            document.getElementById(form).style.display = 'block';
+        } else {
+            document.getElementById(form).style.display = 'none';
+        }
+    });
+}
+
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var username = form.querySelector('input[type="text"]').value;
+        var password = form.querySelector('input[type="password"]').value;
+        var email = form.querySelector('input[type="email"]');
+
+        if (username && password && (!email || email.value)) {
+            alert(form.id === 'loginForm' ? 'Login successful' : 'Signup successful');
+            // Further processing here
+        } else {
+            alert('Please fill in all fields.');
+        }
+    });
+});
+</script>
+</body>
+</html>
